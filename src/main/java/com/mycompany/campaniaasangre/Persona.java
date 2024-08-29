@@ -8,6 +8,7 @@ public class Persona {
     private String direccion;
     private String telefono;
     private String email;
+    private Campania campania;
 
     public Persona(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email) {
         this.nombre = nombre;
@@ -76,5 +77,12 @@ public class Persona {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
+    public Campania getCampania() {
+        return campania;
+    }
+    
+    public void setCampania(Campania campania) {
+        this.campania = campania;
+    }
 }
