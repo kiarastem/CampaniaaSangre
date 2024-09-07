@@ -25,6 +25,7 @@ public class Donante {
         return tipoSangre;
     }
 
+    @SuppressWarnings("StringEquality")
     public void setTipoSangre(String tipoSangre) {
         if (tipoSangre == "A"|| tipoSangre == "B"|| tipoSangre == "AB"|| tipoSangre == "O") {
             this.tipoSangre = tipoSangre;
@@ -35,6 +36,7 @@ public class Donante {
         return factorRH;
     }
 
+    @SuppressWarnings("StringEquality")
     public void setFactorRH(String factorRH) {
         if (factorRH == "+" || factorRH == "-") {
             this.factorRH = factorRH;
@@ -47,5 +49,9 @@ public class Donante {
 
     public void setCantDonada(double cantDonada) {
         this.cantDonada = cantDonada;
+    }
+    
+    public String getDetalles() {
+        return persona.getNombre() + " (" + tipoSangre + factorRH + ") - " + cantDonada + "mL donados";
     }
 }
