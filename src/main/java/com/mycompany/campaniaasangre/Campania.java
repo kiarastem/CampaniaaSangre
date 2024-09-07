@@ -5,6 +5,7 @@ public class Campania {
     private String nombre;
     private String ubicacion;
     private String fecha;
+    @SuppressWarnings("FieldMayBeFinal")
     private List<Donante> donantes;
     
     public Campania(String nombre, String ubicacion, String fecha) {
@@ -16,6 +17,11 @@ public class Campania {
     
     public void agregarDonante(Donante donante){
         donantes.add(donante);
+    }
+    
+    public void agregarDonante(String nombre, String tipoSangre, String factorRH, double cantidadDonada, Persona persona) {
+        Donante nuevoDonante = new Donante(persona, tipoSangre, factorRH, cantidadDonada);
+        donantes.add(nuevoDonante);
     }
     
     public List<Donante> getDonantesRegistrados(){
