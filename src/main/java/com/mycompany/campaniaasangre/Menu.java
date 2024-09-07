@@ -94,6 +94,6 @@ public class Menu {
                 default:
                     System.out.println("Opción no válida.");
             }
-        }
+        }while(opcion != 5);
     }
 }
