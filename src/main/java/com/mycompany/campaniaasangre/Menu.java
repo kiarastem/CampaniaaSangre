@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Menu {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SangreInvalidaException, UnfoundCampainException {
         BancoSangre BancoDeSangre = new BancoSangre();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int opcion;
@@ -21,22 +21,22 @@ public class Menu {
             opcion = Integer.parseInt(reader.readLine());
             
             switch(opcion) {
-                case 1:
+                case 1 -> {
                     System.out.print("Ingrese la ubicación de la campaña: ");
                     String ubicacion = reader.readLine();
                     System.out.print("Ingrese el nombre de la campaña: ");
                     String nombreCampania = reader.readLine();
                     System.out.print("Ingrese la fecha de la campaña (DD-MM-AAAA): ");
                     String fecha = reader.readLine();
-                   
+                    
                     
                     // Crear nueva campaña
                     Campania nuevaCampania = new Campania(nombreCampania, ubicacion, fecha);
                     BancoDeSangre.agregarCampaña(nuevaCampania);
                     System.out.println("Campaña agregada correctamente.");
-                    break;
+                }
 
-                case 2:
+                case 2 -> {
                     // Agregar donante a campaña
                     System.out.print("Ingrese la ubicación: ");
                     String ubicacionCampania = reader.readLine();
@@ -45,7 +45,7 @@ public class Menu {
                     
                     System.out.print("Ingrese nombre del donante: ");
                     String nombreDonante = reader.readLine();
-                     System.out.print("Ingrese la edad del donante: ");
+                    System.out.print("Ingrese la edad del donante: ");
                     int edad = Integer.parseInt(reader.readLine());
                     System.out.print("Ingrese el RUT del donante: ");
                     String rut = reader.readLine();
@@ -71,28 +71,20 @@ public class Menu {
                     // Registrar donante en la campaña
                     BancoDeSangre.registrarDonanteEnCampaña(nuevoDonante, ubicacionCampania, nombreCampaniaDonante);
                     System.out.println("Donante agregado a la campaña.");
-                    break;
+                }
 
-                case 3:
+                case 3 -> {
                     // Mostrar donantes de una campaña
                     System.out.print("Ingrese la ubicación: ");
                     String ubicacionMostrar = reader.readLine();
                     System.out.print("Ingrese el nombre de la campaña: ");
                     String nombreCampaniaMostrar = reader.readLine();
                     BancoDeSangre.mostrarDonantesDeCampania(ubicacionMostrar, nombreCampaniaMostrar);
-                    break;
-
-                case 4:
-                    // Mostrar inventario de sangre
-                    BancoDeSangre.mostrarInventarioSangre();
-                    break;
-
-                case 5:
-                    System.out.println("Saliendo del sistema...");
-                    break;
-
-                default:
-                    System.out.println("Opción no válida.");
+                }
+                
+                case 4 -> BancoDeSangre.mostrarInventarioSangre();
+                case 5 -> System.out.println("Saliendo del sistema...");
+                default -> System.out.println("Opción no válida.");
             }
         }while(opcion != 5);
     }

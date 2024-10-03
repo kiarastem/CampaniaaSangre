@@ -6,7 +6,10 @@ package com.mycompany.campaniaasangre;
 
 import java.util.*;
 
-public class InventarioSangre {
+
+
+public class InventarioSangre
+{
     @SuppressWarnings("FieldMayBeFinal")
     private Map<String, Integer> reservasSangre;
     
@@ -23,12 +26,12 @@ public class InventarioSangre {
         reservasSangre.put("AB-", 0);
 }
     
-    public void agregarSangre(String tipoSangre, int cantidad) {
+    public void agregarSangre(String tipoSangre, int cantidad)throws SangreInvalidaException {
         if(reservasSangre.containsKey(tipoSangre)){
             reservasSangre.put(tipoSangre, reservasSangre.get(tipoSangre) + cantidad);
         }
         else {
-            System.out.println("Tipo de sangre no válido");
+            throw new SangreInvalidaException();
         }
     }
     

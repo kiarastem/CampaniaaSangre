@@ -79,15 +79,24 @@ public class BancoSangre {
         campañas.put(clave, (List<Campania>) campaña);
     }
     
-    public void registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre){
+    public void registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre) throws UnfoundCampainException
+    {
         String clave = generarClaveCampania(ubicacion, nombre);
         Campania campaña = (Campania) campañas.get(clave);
-        if(campaña != null) {
-            campaña.agregarDonante(donante);
-            inventarioDeSangre.agregarSangre(donante.getTipoSangre(), (int) donante.getCantDonada());
+        try
+        {    
+            if(campaña != null) 
+            {
+                campaña.agregarDonante(donante);
+                inventarioDeSangre.agregarSangre(donante.getTipoSangre(), (int) donante.getCantDonada());
+            }
+            else {
+            throw new UnfoundCampainException();
+            }
         }
-        else {
-            System.out.println("Campaña no encontrada.");
+        catch (SangreInvalidaException a)
+        {
+            System.out.println("Tipo de sangre del donante no valido");
         }
     }
     
@@ -96,7 +105,7 @@ public class BancoSangre {
         System.out.println("Donante registrado en la campaña: " + campania.getNombre());
     }
     
-    public void mostrarDonantesDeCampania(String ubicacion, String nombre) {
+    public void mostrarDonantesDeCampania(String ubicacion, String nombre) throws UnfoundCampainException{
         String clave = generarClaveCampania(ubicacion, nombre);
         Campania campania = (Campania) campañas.get(clave);
         if (campania != null) {
@@ -105,7 +114,7 @@ public class BancoSangre {
                 System.out.println(d.getDetalles());
             }
         } else {
-            System.out.println("Campaña no encontrada.");
+            throw new UnfoundCampainException();
         }
     }
     
