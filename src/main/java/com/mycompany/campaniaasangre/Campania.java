@@ -7,25 +7,79 @@ public class Campania {
     private String fecha;
     @SuppressWarnings("FieldMayBeFinal")
     private List<Donante> donantes;
+    private List<PersonalEnfermero> personal;
     
     public Campania(String nombre, String ubicacion, String fecha) {
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.fecha = fecha;
         this.donantes = new ArrayList<>();
+        this.personal = new ArrayList<>();
     }
     
     public void agregarDonante(Donante donante){
         donantes.add(donante);
     }
     
-    public void agregarDonante(String nombre, String tipoSangre, String factorRH, double cantidadDonada, Persona persona) {
-        Donante nuevoDonante = new Donante(persona, tipoSangre, factorRH, cantidadDonada);
+    public void agregarDonante(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email,  String tipoSangre, String factorRH, double cantidadDonada, Persona persona) {
+        Donante nuevoDonante = new Donante(nombre, edad, rut, genero, direccion, telefono, email, tipoSangre, factorRH, cantidadDonada);
         donantes.add(nuevoDonante);
     }
     
+    public void modificarDonante(String rut, Donante nuevosDetalles) {
+        for (Donante donante : donantes) {
+            if (donante.getRut().equals(rut)) {
+                donante.setNombre(nuevosDetalles.getNombre());
+                donante.setEdad(nuevosDetalles.getEdad());
+                donante.setDireccion(nuevosDetalles.getDireccion());
+                donante.setTelefono(nuevosDetalles.getTelefono());
+                donante.setEmail(nuevosDetalles.getEmail());
+                donante.setTipoSangre(nuevosDetalles.getTipoSangre());
+                donante.setFactorRH(nuevosDetalles.getFactorRH());
+                donante.setCantDonada(nuevosDetalles.getCantDonada());
+                System.out.println("Los detalles del donante han sido actualizados.");
+                return;
+            }
+        }
+        System.out.println("Donante no encontrado.");
+    }
+
+    public void eliminarDonante(String rut) {
+        Iterator<Donante> iterador = donantes.iterator();
+        while (iterador.hasNext()) {
+            Donante donante = iterador.next();
+            if (donante.getRut().equals(rut)) {
+                iterador.remove(); // Eliminar el donante de la lista
+                System.out.println("Donante eliminado correctamente.");
+                return;
+            }
+        }
+        System.out.println("Donante no encontrado.");
+    }
+
+    
     public List<Donante> getDonantesRegistrados(){
         return donantes;
+    }
+    
+    public List<Donante> filtrarDonantesPorTipoSangre(String tipoSangre) {
+        List<Donante> donantesFiltrados = new ArrayList<>();
+    
+        for (Donante donante : donantes) {
+            if (donante.getTipoSangre().equals(tipoSangre)) {
+                donantesFiltrados.add(donante);
+            }
+        }
+    
+        return donantesFiltrados;
+    }
+
+    public void agregarPersonalEnfermero(PersonalEnfermero enfermero) {
+        personal.add(enfermero);
+    }
+    
+    public List<PersonalEnfermero> getPersonalEnfermero() {
+        return personal;
     }
     
     public String getNombre() {

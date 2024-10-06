@@ -1,24 +1,15 @@
 package com.mycompany.campaniaasangre;
 
-public class Donante {
-    private Persona persona;
+public class Donante extends Persona{
     private String tipoSangre;
     private String factorRH;
     private double cantDonada;
     
-    public Donante(Persona persona, String tipoSangre, String factorRH, double cantDonada) {
-        this.persona = persona;
+    public Donante(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email, String tipoSangre, String factorRH, double cantDonada) {
+        super(nombre, edad, rut, genero, direccion, telefono, email);
         this.tipoSangre = tipoSangre;
         this.factorRH = factorRH;
         this.cantDonada = cantDonada;
-    }
-    
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
     }
 
     public String getTipoSangre() {
@@ -51,7 +42,8 @@ public class Donante {
         this.cantDonada = cantDonada;
     }
     
-    public String getDetalles() {
-        return persona.getNombre() + " (" + tipoSangre + factorRH + ") - " + cantDonada + "mL donados";
+    @Override
+     public String getDetalles() {
+        return super.getDetalles() + " - Tipo de Sangre: " + tipoSangre + factorRH + " - Cantidad Donada: " + cantDonada + "mL";
     }
 }

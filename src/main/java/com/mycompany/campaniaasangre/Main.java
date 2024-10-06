@@ -11,8 +11,6 @@ public class Main {
         
         do {
             
-            limpiarPantalla();
-            
             System.out.println("=== Menú de Gestión de Campañas de Donación ===");
             System.out.println("1. Agregar Campaña nueva");
             System.out.println("2. Agregar Donante a Campaña");
@@ -69,8 +67,7 @@ public class Main {
                     double cantidadDonada = Double.parseDouble(reader.readLine());
                     
                     // Crear Donante
-                    Persona nuevaPersona = new Persona(nombreDonante, edad, rut, genero, direccion, telefono, email);
-                    Donante nuevoDonante = new Donante(nuevaPersona, tipoSangre, factorRH, cantidadDonada);
+                    Donante nuevoDonante = new Donante(nombreDonante, edad, rut, genero, direccion, telefono, email, tipoSangre, factorRH, cantidadDonada);
                     
                     // Registrar donante en la campaña
                     BancoDeSangre.registrarDonanteEnCampaña(nuevoDonante, ubicacionCampania, nombreCampaniaDonante);
@@ -89,6 +86,7 @@ public class Main {
                 case 4 -> {
                     // Mostrar campañas guardadas
                     BancoDeSangre.listarCampanias();
+                    
                 }
 
                 case 5 -> // Mostrar inventario de sangre
@@ -99,10 +97,5 @@ public class Main {
                 default -> System.out.println("Opción no válida.");
             }
         }while(opcion != 6);
-    }
-    public static void limpiarPantalla() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println();
-        }
     }
 }

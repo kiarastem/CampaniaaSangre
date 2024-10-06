@@ -39,7 +39,7 @@ public class InventarioSangre {
     public void mostrarInventario() {
         System.out.println("Inventario de reservas de sangre:");
         for(Map.Entry<String, Integer> entry : reservasSangre.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue() + "unidades");
+            System.out.println(entry.getKey() + ": " + entry.getValue() + " unidades");
         }
     }
 }
