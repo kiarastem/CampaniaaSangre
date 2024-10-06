@@ -85,4 +85,8 @@ public class Persona {
     public void setCampania(Campania campania) {
         this.campania = campania;
     }
+    
+    public String getDetalles() {
+        return "Nombre: " + nombre + ", Edad: " + edad + ", RUT: " + rut;
+    }
 }

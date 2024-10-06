@@ -44,8 +44,7 @@ public class BancoSangre {
                 String nombreCampania = datos[10];
                 String hospital = datos[11];
 
-                Persona persona = new Persona(nombre, edad, rut, genero, direccion, telefono, email);
-                Donante donante = new Donante(persona, tipoSangre, factorRH, cantDonada);
+                Donante donante = new Donante(nombre, edad, rut, genero, direccion, telefono, email, tipoSangre, factorRH, cantDonada);
 
                 Campania campaña = buscarOCrearCampania(nombreCampania);
 
@@ -115,26 +114,83 @@ public class BancoSangre {
         } else {
             System.out.println("Campaña no encontrada.");
         }
-   }
-   
-   public void listarCampanias() {
-    if (campañas.isEmpty()) {
-        System.out.println("No hay campañas registradas.");
-        return;
     }
-
-    System.out.println("Listado de campañas:");
-    for (Map.Entry<String, List<Campania>> entry : campañas.entrySet()) {
-        String clave = entry.getKey();
-        List<Campania> listaCampanias = entry.getValue();
-
-        for (Campania campania : listaCampanias) {
-            System.out.println("Nombre: " + campania.getNombre() + ", Hospital: " + campania.getUbicacion() + ", Fecha: " + campania.getFecha());
+   
+    public void modificarDonanteEnCampania(String rut, Donante nuevosDetalles, String ubicacion, String nombreCampania) {
+        String clave = generarClaveCampania(ubicacion, nombreCampania);
+        List<Campania> listaCampanias = campañas.get(clave);
+    
+        if (listaCampanias != null && !listaCampanias.isEmpty()) {
+            Campania campania = listaCampanias.get(0); // Asumiendo que es una sola campaña
+            campania.modificarDonante(rut, nuevosDetalles);
+        } else {
+            System.out.println("Campaña no encontrada.");
         }
     }
-}
+    
+    public void eliminarDonanteEnCampania(String rut, String ubicacion, String nombreCampania) {
+        String clave = generarClaveCampania(ubicacion, nombreCampania);
+        List<Campania> listaCampanias = campañas.get(clave);
+    
+        if (listaCampanias != null && !listaCampanias.isEmpty()) {
+            Campania campania = listaCampanias.get(0); // Asumiendo que es una sola campaña
+            campania.eliminarDonante(rut);
+        } else {
+            System.out.println("Campaña no encontrada.");
+        }
+    }
+    
+    public boolean eliminarCampania(String ubicacion, String nombreCampania) {
+        if (campañas.containsKey(ubicacion)) {
+            List<Campania> listaCampanias = campañas.get(ubicacion);
+
+            for (int i = 0; i < listaCampanias.size(); i++) {
+                if (listaCampanias.get(i).getNombre().equals(nombreCampania)) {
+                    listaCampanias.remove(i);
+                
+                    // Si la lista queda vacía, eliminar también la entrada en el mapa
+                    if (listaCampanias.isEmpty()) {
+                        campañas.remove(ubicacion);
+                    }
+                
+                    return true; // Indica que la campaña fue eliminada exitosamente
+                }
+            }
+        }
+    
+        return false; // Indica que no se encontró la campaña
+    }
 
     
+    public void listarCampanias() {
+       if (campañas.isEmpty()) {
+           System.out.println("No hay campañas registradas.");
+           return;
+       }
+       System.out.println("Listado de campañas:");
+       for (Map.Entry<String, List<Campania>> entry : campañas.entrySet()) {
+           String clave = entry.getKey();
+           List<Campania> listaCampanias = entry.getValue();
+           
+            for (Campania campania : listaCampanias) {
+                System.out.println("Nombre: " + campania.getNombre() + ", Hospital: " + campania.getUbicacion() + ", Fecha: " + campania.getFecha());
+            }
+       }
+    }
+    
+    public List<Donante> filtrarDonantesPorTipoSangreEnTodasLasCampanias(String tipoSangre) {
+        List<Donante> donantesFiltrados = new ArrayList<>();
+    
+        for (List<Campania> listaCampanias : campañas.values()) {
+            for (Campania campania : listaCampanias) {
+                donantesFiltrados.addAll(campania.filtrarDonantesPorTipoSangre(tipoSangre));
+            }
+        }
+    
+        return donantesFiltrados;
+    }
+
+
     public void mostrarInventarioSangre() {
         inventarioDeSangre.mostrarInventario();
     }
