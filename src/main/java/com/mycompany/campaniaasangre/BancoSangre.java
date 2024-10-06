@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -74,32 +74,40 @@ public class BancoSangre {
         return hospital + "-" + nombreCampania;
     }
     
-    public void agregarCampaña(Campania campaña){
+    public void agregarCampaña(Campania campaña) {
         String clave = generarClaveCampania(campaña.getUbicacion(), campaña.getNombre());
-        campañas.put(clave, (List<Campania>) campaña);
-    }
+        List<Campania> listaCampañas = campañas.getOrDefault(clave, new ArrayList<>());
+        listaCampañas.add(campaña);
+        campañas.put(clave, listaCampañas);
+}
+
     
-    public void registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre){
+    public void registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre) {
         String clave = generarClaveCampania(ubicacion, nombre);
-        Campania campaña = (Campania) campañas.get(clave);
-        if(campaña != null) {
+        List<Campania> listaCampañas = campañas.get(clave);
+    
+        if(listaCampañas != null) {
+            // Aquí podrías buscar la campaña adecuada en la lista si hay más de una
+            Campania campaña = listaCampañas.get(0); // Esto asume que siempre hay al menos una
             campaña.agregarDonante(donante);
             inventarioDeSangre.agregarSangre(donante.getTipoSangre(), (int) donante.getCantDonada());
-        }
-        else {
+        } else {
             System.out.println("Campaña no encontrada.");
         }
     }
+
     
     public void registrarDonanteEnCampania(Donante donante, Campania campania) {
         campania.agregarDonante(donante);
         System.out.println("Donante registrado en la campaña: " + campania.getNombre());
     }
     
-    public void mostrarDonantesDeCampania(String ubicacion, String nombre) {
-        String clave = generarClaveCampania(ubicacion, nombre);
-        Campania campania = (Campania) campañas.get(clave);
-        if (campania != null) {
+   public void mostrarDonantesDeCampania(String ubicacion, String nombre) {
+       String clave = generarClaveCampania(ubicacion, nombre);
+        List<Campania> listaCampanias = campañas.get(clave); // Obtener la lista de campañas asociada a la clave
+        if (listaCampanias != null && !listaCampanias.isEmpty()) {
+            Campania campania = listaCampanias.get(0); // Si solo hay una campaña, tomamos la primera
+            // Mostrar los donantes de la campaña
             System.out.println("Donantes de la campaña " + campania.getNombre() + " en el hospital " + ubicacion + ":");
             for (Donante d : campania.getDonantesRegistrados()) {
                 System.out.println(d.getDetalles());
@@ -107,7 +115,25 @@ public class BancoSangre {
         } else {
             System.out.println("Campaña no encontrada.");
         }
+   }
+   
+   public void listarCampanias() {
+    if (campañas.isEmpty()) {
+        System.out.println("No hay campañas registradas.");
+        return;
     }
+
+    System.out.println("Listado de campañas:");
+    for (Map.Entry<String, List<Campania>> entry : campañas.entrySet()) {
+        String clave = entry.getKey();
+        List<Campania> listaCampanias = entry.getValue();
+
+        for (Campania campania : listaCampanias) {
+            System.out.println("Nombre: " + campania.getNombre() + ", Hospital: " + campania.getUbicacion() + ", Fecha: " + campania.getFecha());
+        }
+    }
+}
+
     
     public void mostrarInventarioSangre() {
         inventarioDeSangre.mostrarInventario();
