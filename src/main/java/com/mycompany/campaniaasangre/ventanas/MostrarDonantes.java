@@ -5,6 +5,7 @@
 package com.mycompany.campaniaasangre.ventanas;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.*;
 
 /**
  *
@@ -131,17 +132,34 @@ public class MostrarDonantes extends javax.swing.JFrame {
     public void llenarTabla() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // Limpiar la tabla antes de llenarla
-        // Iteramos sobre todos los donantes del banco
-        for (Donante donante : banco.obtenerTodosLosDonantes()) {
-            Object[] fila = {
-                donante.getNombre(),
-                donante.getTipoSangre(),
-                donante.getFactorRH(),
-                donante.getCantDonada()
-            };
-            model.addRow(fila);
+        
+        List<Donante> donantes = banco.obtenerTodosLosDonantes();
+
+        // Agregar los donantes al modelo de la tabla
+        for (Donante d : donantes) {
+            // Debes asegurarte de que cada donante se relaciona con una campaña
+            String nombreCampania = obtenerNombreCampaniaDeDonante(d);
+            model.addRow(new Object[]{
+                d.getNombre(),
+                d.getTipoSangre(),
+                d.getFactorRH(),
+                d.getCantDonada(),
+                nombreCampania
+            });
         }
     }
+    
+    private String obtenerNombreCampaniaDeDonante(Donante donante) {
+        for (List<Campania> campanias : banco.getCampanias().values()) {
+            for (Campania campania : campanias) {
+                if (campania.getDonantesRegistrados().contains(donante)) {
+                    return campania.getNombre();
+                }
+            }
+        }
+        return "Desconocida"; // Si no se encuentra la campaña
+    }
+    
     /**
      * @param args the command line arguments
      */

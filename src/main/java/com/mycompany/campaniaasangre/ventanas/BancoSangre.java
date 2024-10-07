@@ -132,7 +132,7 @@ public class BancoSangre {
        
        for(List<Campania> campanias : campañas.values()){
            for (Campania campania : campanias) {
-               todos.addAll(campania.getDonantesRegistrados())
+               todos.addAll(campania.getDonantesRegistrados());
            }
        }
        return todos;
@@ -200,6 +200,19 @@ public class BancoSangre {
        }
     }
     
+    public void listarTodosLosDonantes() {
+        List<Donante> donantes = obtenerTodosLosDonantes(); // Llama al método existente para obtener todos los donantes
+
+        if (donantes.isEmpty()) {
+            System.out.println("No hay donantes registrados.");
+        } else {
+            System.out.println("Listado de todos los donantes:");
+            for (Donante donante : donantes) {
+                System.out.println(donante.getDetalles()); // Asegúrate de que el método getDetalles() devuelva la información necesaria
+            }
+        }
+    }
+    
     public List<Donante> filtrarDonantesPorTipoSangreEnTodasLasCampanias(String tipoSangre) {
         List<Donante> donantesFiltrados = new ArrayList<>();
     
@@ -210,6 +223,10 @@ public class BancoSangre {
         }
     
         return donantesFiltrados;
+    }
+    
+    public Map<String, List<Campania>> getCampanias() {
+        return campañas;
     }
 
 

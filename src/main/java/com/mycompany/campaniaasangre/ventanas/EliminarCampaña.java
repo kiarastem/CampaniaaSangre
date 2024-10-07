@@ -8,13 +8,13 @@ package com.mycompany.campaniaasangre.ventanas;
  *
  * @author kndre
  */
-public class EliminarDonante extends javax.swing.JFrame {
+public class EliminarCampaña extends javax.swing.JFrame {
     private BancoSangre banco;
 
     /**
      * Creates new form agregarCampania
      */
-    public EliminarDonante(BancoSangre banco) {
+    public EliminarCampaña(BancoSangre banco) {
         this.banco = banco;
         initComponents();
     }
