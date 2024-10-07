@@ -9,11 +9,12 @@ package com.mycompany.campaniaasangre.ventanas;
  * @author kndre
  */
 public class ModificarDonante extends javax.swing.JFrame {
-
+    private BancoSangre banco;
     /**
      * Creates new form AgregarDonanteCampania
      */
-    public ModificarDonante() {
+    public ModificarDonante(BancoSangre banco) {
+        this.banco = banco;
         initComponents();
     }
 
@@ -30,12 +31,17 @@ public class ModificarDonante extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jTextFieldNomCamMod = new javax.swing.JTextField();
+        jTextFieldUbicaMod = new javax.swing.JTextField();
+        jTextFieldFactorMod = new javax.swing.JTextField();
+        jButtonCancelar = new javax.swing.JButton();
+        jButtonMod = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextFieldRutMod = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldSangreMod = new javax.swing.JTextField();
+        jTextFieldCantMod = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,41 +50,63 @@ public class ModificarDonante extends javax.swing.JFrame {
         label2.setFont(new java.awt.Font("Dialog", 3, 24)); // NOI18N
         label2.setForeground(new java.awt.Color(240, 242, 242));
         label2.setName("titulo"); // NOI18N
-        label2.setText("Agregar donante - Datos sanguíneos");
+        label2.setText("Modificar donante");
 
-        jLabel1.setText("Tipo de sangre                   :");
+        jLabel1.setText("Nombre de la campaña del donante a modificar :");
 
-        jLabel2.setText("Factor RH                           :");
+        jLabel2.setText("Ubicación de la campaña del donante a modificar   :");
 
-        jLabel3.setText("Cantidad de sangre donada:");
+        jLabel3.setText("Tipo de sangre nuevo :");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNomCamMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTextFieldNomCamModActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldUbicaMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jTextFieldUbicaModActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Cancelar");
-
-        jButton2.setText("Agregar");
-        jButton2.setToolTipText("");
-        jButton2.setActionCommand("");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldFactorMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jTextFieldFactorModActionPerformed(evt);
             }
         });
 
-        jButton3.setText("<<< Anterior");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
+        jButtonMod.setText("Modificar");
+        jButtonMod.setToolTipText("");
+        jButtonMod.setActionCommand("");
+        jButtonMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Cantidad de sangre donada nueva :");
+
+        jLabel5.setText("Factor RH nuevo :");
+
+        jLabel6.setText("Rut del donante a modificar    :");
+
+        jTextFieldSangreMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSangreModActionPerformed(evt);
+            }
+        });
+
+        jTextFieldCantMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCantModActionPerformed(evt);
             }
         });
 
@@ -86,81 +114,114 @@ public class ModificarDonante extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+            .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGap(80, 80, 80)
+                .addComponent(jButtonCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(58, 58, 58))
+                .addComponent(jButtonMod)
+                .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldSangreMod, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextFieldNomCamMod, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                        .addComponent(jTextFieldUbicaMod)
+                        .addComponent(jTextFieldRutMod, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jTextFieldFactorMod, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCantMod, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldRutMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextFieldNomCamMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextFieldUbicaMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(jTextFieldSangreMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(37, 37, 37))
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldFactorMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jButtonCancelar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldCantMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonMod)
+                        .addGap(17, 17, 17))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextFieldUbicaModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUbicaModActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTextFieldUbicaModActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jTextFieldFactorModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFactorModActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jTextFieldFactorModActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButtonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModActionPerformed
+        banco.modificarDonanteEnCampania(jTextFieldRutMod.getText(), Double.parseDouble(jTextFieldSangreMod.getText()), jTextFieldSangreMod.getText(), jTextFieldFactorMod.getText(), jTextFieldUbicaMod.getText(), jTextFieldNomCamMod.getText());
+    }//GEN-LAST:event_jButtonModActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        VentanaDonantes vd = new VentanaDonantes(banco);
+        vd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextFieldSangreModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSangreModActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jTextFieldSangreModActionPerformed
+
+    private void jTextFieldCantModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCantModActionPerformed
+
+    private void jTextFieldNomCamModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomCamModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomCamModActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /**public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+        /**try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -180,23 +241,28 @@ public class ModificarDonante extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /**java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificarDonante().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonMod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField jTextFieldCantMod;
+    private javax.swing.JTextField jTextFieldFactorMod;
+    private javax.swing.JTextField jTextFieldNomCamMod;
+    private javax.swing.JTextField jTextFieldRutMod;
+    private javax.swing.JTextField jTextFieldSangreMod;
+    private javax.swing.JTextField jTextFieldUbicaMod;
     private java.awt.Label label2;
     // End of variables declaration//GEN-END:variables
 }
