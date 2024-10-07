@@ -151,7 +151,7 @@ public class VentanaDonantes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        EliminarDonante e = new EliminarDonante();
+        EliminarDonante e = new EliminarDonante(banco);
         e.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed

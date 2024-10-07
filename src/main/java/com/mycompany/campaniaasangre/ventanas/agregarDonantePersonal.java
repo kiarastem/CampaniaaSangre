@@ -88,7 +88,7 @@ public class agregarDonantePersonal extends javax.swing.JFrame {
             }
         });
 
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Volver");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
@@ -284,7 +284,7 @@ public class agregarDonantePersonal extends javax.swing.JFrame {
                         .addComponent(jLabel12)
                         .addComponent(jTextFieldCantidadDonada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonAdd))
                 .addGap(22, 22, 22))

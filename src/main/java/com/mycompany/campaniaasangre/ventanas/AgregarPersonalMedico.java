@@ -4,17 +4,20 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+import java.util.Optional;
+import javax.swing.*;
 /**
  *
  * @author kndre
  */
-public class EliminarDonante extends javax.swing.JFrame {
+public class AgregarPersonalMedico extends javax.swing.JFrame {
     private BancoSangre banco;
+
 
     /**
      * Creates new form agregarCampania
      */
-    public EliminarDonante(BancoSangre banco) {
+    public AgregarPersonalMedico(BancoSangre banco) {
         this.banco = banco;
         initComponents();
     }
@@ -32,11 +35,11 @@ public class EliminarDonante extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldRutEli = new javax.swing.JTextField();
-        jTextFieldUbicaEli = new javax.swing.JTextField();
-        jTextFieldNomEli = new javax.swing.JTextField();
+        jTextFieldNom = new javax.swing.JTextField();
+        jTextFieldUbica = new javax.swing.JTextField();
+        jTextFieldCantPers = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
-        jButtonElim = new javax.swing.JButton();
+        jButtonAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,43 +48,37 @@ public class EliminarDonante extends javax.swing.JFrame {
         label2.setFont(new java.awt.Font("Dialog", 3, 24)); // NOI18N
         label2.setForeground(new java.awt.Color(240, 242, 242));
         label2.setName("titulo"); // NOI18N
-        label2.setText("Eliminar Donante");
+        label2.setText("Agregar personal a campaña");
 
-        jLabel1.setText("Rut del donante a eliminar");
+        jLabel1.setText("Nombre de la campaña         :");
 
-        jLabel2.setText("Ubicación de la campaña del donante a eliminar     :");
+        jLabel2.setText("Ubicación de la campaña (Ej: Hospital Van Buren)       :");
 
-        jLabel3.setText("Nombre de la campaña del donante a eliminar");
+        jLabel3.setText("Cantidad de personal a asignar   :");
 
-        jTextFieldRutEli.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldUbica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldRutEliActionPerformed(evt);
+                jTextFieldUbicaActionPerformed(evt);
             }
         });
 
-        jTextFieldUbicaEli.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCantPers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUbicaEliActionPerformed(evt);
+                jTextFieldCantPersActionPerformed(evt);
             }
         });
 
-        jTextFieldNomEli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomEliActionPerformed(evt);
-            }
-        });
-
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Volver");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
             }
         });
 
-        jButtonElim.setText("Eliminar");
-        jButtonElim.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdd.setText("Asignar");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonElimActionPerformed(evt);
+                jButtonAddActionPerformed(evt);
             }
         });
 
@@ -100,14 +97,14 @@ public class EliminarDonante extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNomEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldUbicaEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRutEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextFieldCantPers, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldUbica, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(50, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonElim)
+                        .addComponent(jButtonAdd)
                         .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
@@ -117,46 +114,74 @@ public class EliminarDonante extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldRutEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldUbicaEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldUbica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldNomEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCantPers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonElim))
+                    .addComponent(jButtonAdd))
                 .addGap(37, 37, 37))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldUbicaEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUbicaEliActionPerformed
+    private void jTextFieldUbicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUbicaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUbicaEliActionPerformed
+    }//GEN-LAST:event_jTextFieldUbicaActionPerformed
 
-    private void jTextFieldNomEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomEliActionPerformed
+    private void jTextFieldCantPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantPersActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNomEliActionPerformed
+    }//GEN-LAST:event_jTextFieldCantPersActionPerformed
 
-    private void jButtonElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonElimActionPerformed
-        String rut = jTextFieldRutEli.getText();
-        String nomCam = jTextFieldNomEli.getText();
-        String ubic = jTextFieldUbicaEli.getText();
-        banco.eliminarDonanteEnCampania(rut, ubic, nomCam);
-    }//GEN-LAST:event_jButtonElimActionPerformed
-
-    private void jTextFieldRutEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRutEliActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldRutEliActionPerformed
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        String nom = jTextFieldNom.getText();
+        String ubica = jTextFieldUbica.getText();
+        String cantStr = jTextFieldCantPers.getText();
+        
+        int cantPers;
+        try{
+            cantPers = Integer.parseInt(cantStr);
+        } catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(this, "Cantidad de personal no válida", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        Optional<Campania> resultado = banco.buscarOCrearCampania(nom);
+        
+        if(resultado.isPresent()){
+            Campania campania = resultado.get();
+            StringBuilder resultadoBuilder = new StringBuilder();
+            
+            for(int i = 0; i < cantPers; i++) {
+                String nombreEnfermero = JOptionPane.showInputDialog("Nombre del personal " + (i + 1) + ":");
+                int edadEnf = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la edad del personal:"));
+                String rut = JOptionPane.showInputDialog("Ingrese el RUT del personal:");
+                String genero = JOptionPane.showInputDialog("Ingrese el sexo del personal (M/F):");
+                String direccion = JOptionPane.showInputDialog("Ingrese la dirección del personal:");
+                String telefono = JOptionPane.showInputDialog("Ingrese el teléfono del personal:");
+                String email = JOptionPane.showInputDialog("Ingrese el email del personal:");
+                String identificacion = JOptionPane.showInputDialog("Ingrese la identificación del personal (Formato: XXX###):");
+                
+                PersonalEnfermero enfermero = new PersonalEnfermero(nombreEnfermero, edadEnf, rut, genero, direccion, telefono, email, identificacion);
+            
+                campania.agregarPersonalEnfermero(enfermero);
+                resultadoBuilder.append("Personal enfermero agregado a la campaña: ").append(campania.getNombre()).append("\n");
+            }
+             JOptionPane.showMessageDialog(this, "Personal agregado con éxito");
+        }   else {
+                JOptionPane.showMessageDialog(this, "Campaña no encontrada", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        VentanaDonantes vd = new VentanaDonantes(banco);
+        VentanaCampañas vd = new VentanaCampañas(banco);
         vd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -178,34 +203,33 @@ public class EliminarDonante extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarDonante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(agregarCampania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarDonante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(agregarCampania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarDonante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(agregarCampania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarDonante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(agregarCampania.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         /**java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EliminarDonante().setVisible(true);
+                new AgregarPersonalMedico().setVisible(true);
             }
         });
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonElim;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextFieldNomEli;
-    private javax.swing.JTextField jTextFieldRutEli;
-    private javax.swing.JTextField jTextFieldUbicaEli;
+    private javax.swing.JTextField jTextFieldCantPers;
+    private javax.swing.JTextField jTextFieldNom;
+    private javax.swing.JTextField jTextFieldUbica;
     private java.awt.Label label2;
     // End of variables declaration//GEN-END:variables
 }
