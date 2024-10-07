@@ -8,7 +8,7 @@ public class PersonalEnfermero extends Persona {
     private String identificacionMedica;
     private String especialidad;
 
-    public PersonalEnfermero(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email, String identificacionMedica, String especialidad) {
+    public PersonalEnfermero(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email, String identificacionMedica) {
         super(nombre, edad, rut, genero, direccion, telefono, email);  // Llamamos al constructor de la clase padre
         this.identificacionMedica = identificacionMedica;
         this.especialidad = especialidad;

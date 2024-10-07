@@ -46,27 +46,24 @@ public class BancoSangre {
 
                 Donante donante = new Donante(nombre, edad, rut, genero, direccion, telefono, email, tipoSangre, factorRH, cantDonada);
 
-                Campania campaña = buscarOCrearCampania(nombreCampania);
-
-                campaña.agregarDonante(donante);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
-    private Campania buscarOCrearCampania(String nombreCampania) {
+    public Optional<Campania> buscarOCrearCampania(String nombreCampania) {
         for (List<Campania> listaCampanias : campañas.values()) {
             for (Campania campania : listaCampanias) {
                 if (campania.getNombre().equals(nombreCampania)) {
-                    return campania;
+                return Optional.of(campania);
                 }
             }
         }
-        // Si no se encuentra la campaña, se crea una nueva
-        Campania nuevaCampania = new Campania(nombreCampania, "Hospital Desconocido", "Fecha Desconocida");
-        campañas.computeIfAbsent("Hospital Desconocido", k -> new ArrayList<>()).add(nuevaCampania);
-        return nuevaCampania;
+    
+        // Si no se encuentra la campaña, retornar un mensaje y un estado
+        System.out.println("Campaña no encontrada: " + nombreCampania);
+        return Optional.empty(); // Indica que la campaña no existe
     }
     
     private String generarClaveCampania(String hospital, String nombreCampania) {
@@ -76,9 +73,23 @@ public class BancoSangre {
     public void agregarCampaña(Campania campaña) {
         String clave = generarClaveCampania(campaña.getUbicacion(), campaña.getNombre());
         List<Campania> listaCampañas = campañas.getOrDefault(clave, new ArrayList<>());
+        
         listaCampañas.add(campaña);
         campañas.put(clave, listaCampañas);
-}
+    }
+    
+    public void agregarPersonalEnfermeroACampania(PersonalEnfermero enfermero, String ubicacion, String nombreCampania) {
+        String clave = generarClaveCampania(ubicacion, nombreCampania);
+        List<Campania> listaCampanias = campañas.get(clave);
+
+        if (listaCampanias != null && !listaCampanias.isEmpty()) {
+            Campania campania = listaCampanias.get(0);
+            campania.agregarPersonalEnfermero(enfermero);
+            System.out.println("Personal enfermero agregado a la campaña: " + campania.getNombre());
+        } else {
+            System.out.println("Campaña no encontrada.");
+        }
+    }
 
     
     public void registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre) {
@@ -89,9 +100,9 @@ public class BancoSangre {
             // Aquí podrías buscar la campaña adecuada en la lista si hay más de una
             Campania campaña = listaCampañas.get(0); // Esto asume que siempre hay al menos una
             campaña.agregarDonante(donante);
-            inventarioDeSangre.agregarSangre(donante.getTipoSangre(), (int) donante.getCantDonada());
+            inventarioDeSangre.agregarSangre(donante.getTipoSangre(), donante.getFactorRH(), (int) donante.getCantDonada());
         } else {
-            System.out.println("Campaña no encontrada.");
+            System.out.println("Campaña no enco1ntrada.");
         }
     }
 
@@ -116,13 +127,13 @@ public class BancoSangre {
         }
     }
    
-    public void modificarDonanteEnCampania(String rut, Donante nuevosDetalles, String ubicacion, String nombreCampania) {
+    public void modificarDonanteEnCampania(String rut, double cantDonada, String tipoSangre, String factorRH, String ubicacion, String nombreCampania) {
         String clave = generarClaveCampania(ubicacion, nombreCampania);
         List<Campania> listaCampanias = campañas.get(clave);
     
         if (listaCampanias != null && !listaCampanias.isEmpty()) {
             Campania campania = listaCampanias.get(0); // Asumiendo que es una sola campaña
-            campania.modificarDonante(rut, nuevosDetalles);
+            campania.modificarDonante(rut, cantDonada, tipoSangre, factorRH);
         } else {
             System.out.println("Campaña no encontrada.");
         }
@@ -140,7 +151,7 @@ public class BancoSangre {
         }
     }
     
-    public boolean eliminarCampania(String ubicacion, String nombreCampania) {
+    public void eliminarCampania(String ubicacion, String nombreCampania) {
         if (campañas.containsKey(ubicacion)) {
             List<Campania> listaCampanias = campañas.get(ubicacion);
 
@@ -153,12 +164,12 @@ public class BancoSangre {
                         campañas.remove(ubicacion);
                     }
                 
-                    return true; // Indica que la campaña fue eliminada exitosamente
+                    System.out.println("Campaña eliminada exitosamente.");
                 }
             }
         }
     
-        return false; // Indica que no se encontró la campaña
+        System.out.println("Campaña no encontrada.");
     }
 
     
@@ -193,5 +204,9 @@ public class BancoSangre {
 
     public void mostrarInventarioSangre() {
         inventarioDeSangre.mostrarInventario();
+    }
+    
+    public void retirarSangre(String tipoSangre, int cantidad) {
+        inventarioDeSangre.retirarSangre(tipoSangre, cantidad);
     }
 }

@@ -7,6 +7,7 @@ public class Campania {
     private String fecha;
     @SuppressWarnings("FieldMayBeFinal")
     private List<Donante> donantes;
+    @SuppressWarnings("FieldMayBeFinal")
     private List<PersonalEnfermero> personal;
     
     public Campania(String nombre, String ubicacion, String fecha) {
@@ -26,17 +27,12 @@ public class Campania {
         donantes.add(nuevoDonante);
     }
     
-    public void modificarDonante(String rut, Donante nuevosDetalles) {
+    public void modificarDonante(String rut, double cantDonada, String tipoSangre, String factorRH) {
         for (Donante donante : donantes) {
             if (donante.getRut().equals(rut)) {
-                donante.setNombre(nuevosDetalles.getNombre());
-                donante.setEdad(nuevosDetalles.getEdad());
-                donante.setDireccion(nuevosDetalles.getDireccion());
-                donante.setTelefono(nuevosDetalles.getTelefono());
-                donante.setEmail(nuevosDetalles.getEmail());
-                donante.setTipoSangre(nuevosDetalles.getTipoSangre());
-                donante.setFactorRH(nuevosDetalles.getFactorRH());
-                donante.setCantDonada(nuevosDetalles.getCantDonada());
+                donante.setTipoSangre(tipoSangre);
+                donante.setFactorRH(factorRH);
+                donante.setCantDonada(cantDonada);
                 System.out.println("Los detalles del donante han sido actualizados.");
                 return;
             }
