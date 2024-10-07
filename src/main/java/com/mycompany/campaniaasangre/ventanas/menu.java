@@ -4,6 +4,7 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,13 +13,18 @@ import java.awt.event.*;
  * @author kndre
  */
 public class menu extends javax.swing.JFrame {
+    @SuppressWarnings("FieldMayBeFinal")
+    private BancoSangre banco;
 
     /**
      * Creates new form menu
      */
-    public menu() {
+    public menu(BancoSangre banco) {
+        this.banco = new BancoSangre();
         initComponents();
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -132,7 +138,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VentanaDonantes a = new VentanaDonantes();
+        VentanaDonantes a = new VentanaDonantes(this.banco);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -173,8 +179,8 @@ public class menu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                
-                new menu().setVisible(true);
+                BancoSangre banco = new BancoSangre();
+                new menu(banco).setVisible(true);
             }
         });
     }
