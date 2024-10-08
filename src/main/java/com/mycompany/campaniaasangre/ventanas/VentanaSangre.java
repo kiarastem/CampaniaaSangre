@@ -9,11 +9,12 @@ package com.mycompany.campaniaasangre.ventanas;
  * @author lucas
  */
 public class VentanaSangre extends javax.swing.JFrame {
-
+    private BancoSangre banco;
     /**
      * Creates new form Donantes
      */
-    public VentanaSangre() {
+    public VentanaSangre(BancoSangre banco) {
+        this.banco = banco;
         initComponents();
     }
 
@@ -132,7 +133,9 @@ public class VentanaSangre extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+        menu menu = new menu(banco);
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -144,7 +147,7 @@ public class VentanaSangre extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+        /*try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -159,18 +162,18 @@ public class VentanaSangre extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentanaSangre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VentanaSangre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        }*/
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaSangre().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
