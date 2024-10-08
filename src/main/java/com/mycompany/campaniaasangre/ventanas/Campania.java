@@ -1,4 +1,5 @@
 package com.mycompany.campaniaasangre.ventanas;
+import com.mycompany.excepciones.DatosDonanteInvalidosException;
 import java.util.*;
 
 public class Campania {
@@ -18,7 +19,10 @@ public class Campania {
         this.personal = new ArrayList<>();
     }
     
-    public void agregarDonante(Donante donante){
+    public void agregarDonante(Donante donante) throws DatosDonanteInvalidosException{
+        if (donante.getNombre().isEmpty() || donante.getRut().isEmpty() || donante.getTipoSangre().isEmpty()) {
+        throw new DatosDonanteInvalidosException("Los campos nombre, RUT y tipo de sangre son obligatorios.");
+        }
         donantes.add(donante);
     }
     

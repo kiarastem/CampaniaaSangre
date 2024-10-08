@@ -5,6 +5,8 @@
 package com.mycompany.campaniaasangre.ventanas;
 
 
+import com.mycompany.excepciones.CampaniaNoEncontradaException;
+import com.mycompany.excepciones.DatosDonanteInvalidosException;
 import java.util.*;
 import java.io.*;
 
@@ -161,7 +163,7 @@ public class BancoSangre {
     }
 
     
-    public boolean registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre) {
+    public boolean registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre) throws DatosDonanteInvalidosException {
         String clave = generarClaveCampania(ubicacion, nombre);
         List<Campania> listaCampañas = campañas.get(clave);
     
@@ -178,7 +180,7 @@ public class BancoSangre {
     }
 
     
-    public void registrarDonanteEnCampania(Donante donante, Campania campania) {
+    public void registrarDonanteEnCampania(Donante donante, Campania campania) throws DatosDonanteInvalidosException {
         campania.agregarDonante(donante);
         System.out.println("Donante registrado en la campaña: " + campania.getNombre());
     }
@@ -228,7 +230,7 @@ public class BancoSangre {
         List<Campania> listaCampanias = campañas.get(clave);
     
         if (listaCampanias != null && !listaCampanias.isEmpty()) {
-            Campania campania = listaCampanias.get(0); // Asumiendo que es una sola campaña
+            Campania campania = listaCampanias.get(0); 
             campania.eliminarDonante(rut);
         } else {
             System.out.println("Campaña no encontrada.");
@@ -237,10 +239,14 @@ public class BancoSangre {
         return true;
     }
     
-    public boolean eliminarCampania(String ubicacion, String nombreCampania) {
+    public boolean eliminarCampania(String ubicacion, String nombreCampania) throws CampaniaNoEncontradaException {
         String clave = generarClaveCampania(ubicacion, nombreCampania);
         if (campañas.containsKey(clave)) {
             List<Campania> listaCampanias = campañas.get(clave);
+            
+            if (listaCampanias == null) {
+                throw new CampaniaNoEncontradaException("No se encontró la campaña en la ubicación especificada.");
+            }
 
             for (int i = 0; i < listaCampanias.size(); i++) {
                 if (listaCampanias.get(i).getNombre().equals(nombreCampania)) {
@@ -256,7 +262,8 @@ public class BancoSangre {
                 }
             }
         }
-    
+        
+        
         System.out.println("Campaña no encontrada.");
         return false;
     }
