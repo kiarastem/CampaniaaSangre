@@ -148,12 +148,30 @@ public class AgregarCampaña extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFechaActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        String nom = jTextFieldNom.getText();
-        String ubica = jTextFieldUbica.getText();
-        String fecha = jTextFieldFecha.getText();
-        
+         // Obtener los textos de los campos
+    String nom = jTextFieldNom.getText().trim();
+    String ubica = jTextFieldUbica.getText().trim();
+    String fecha = jTextFieldFecha.getText().trim();
+    
+    // Verificar si algún campo está vacío
+    if (nom.isEmpty() || ubica.isEmpty() || fecha.isEmpty()) {
+        // Mostrar un mensaje de error si hay campos vacíos
+        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        // Crear la nueva campaña
         Campania nuevaCampania = new Campania(nom, ubica, fecha);
+        
+        // Agregar la campaña al banco de sangre
         banco.agregarCampaña(nuevaCampania);
+        
+        // Mostrar un mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Campaña agregada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Limpiar los campos de texto
+        jTextFieldNom.setText("");
+        jTextFieldUbica.setText("");
+        jTextFieldFecha.setText("");
+    }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

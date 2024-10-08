@@ -83,25 +83,35 @@ public class BancoSangre {
         writer.write("Nombre,Edad,RUT,Género,Dirección,Teléfono,Email,Tipo de Sangre,Factor RH,Cantidad Donada,Nombre Campaña,Ubicación Campaña,Fecha Campaña");
         writer.newLine();
 
-        for(List<Campania> listaCamp : campañas.values()){
-            
+        Set<String> donantesGuardados = new HashSet<>(); // Para rastrear donantes guardados
+
+        for (List<Campania> listaCamp : campañas.values()) {
             for (Campania campania : listaCamp) {
                 for (Donante donante : campania.getDonantesRegistrados()) {
-                    writer.write(String.join(",",
-                        donante.getNombre(),
-                        String.valueOf(donante.getEdad()),
-                        donante.getRut(),
-                        donante.getGenero(),
-                        donante.getDireccion(),
-                        donante.getTelefono(),
-                        donante.getEmail(),
-                        donante.getTipoSangre(),
-                        donante.getFactorRH(),
-                        String.valueOf(donante.getCantDonada()),
-                        campania.getNombre(), // Obtener el nombre de la campaña
-                        campania.getUbicacion(), // Asegúrate de tener un método para obtener la ubicación
-                        campania.getFecha())); // Asegúrate de tener un método para obtener la fecha
-                    writer.newLine();
+                    // Crea un identificador único para cada donante
+                    String donanteId = donante.getRut();
+
+                    // Verifica si el donante ya ha sido guardado
+                    if (!donantesGuardados.contains(donanteId)) {
+                        writer.write(String.join(",",
+                            donante.getNombre(),
+                            String.valueOf(donante.getEdad()),
+                            donante.getRut(),
+                            donante.getGenero(),
+                            donante.getDireccion(),
+                            donante.getTelefono(),
+                            donante.getEmail(),
+                            donante.getTipoSangre(),
+                            donante.getFactorRH(),
+                            String.valueOf(donante.getCantDonada()),
+                            campania.getNombre(), // Obtener el nombre de la campaña
+                            campania.getUbicacion(), // Asegúrate de tener un método para obtener la ubicación
+                            campania.getFecha())); // Asegúrate de tener un método para obtener la fecha
+                        writer.newLine();
+
+                        // Agrega el donante al conjunto de donantes guardados
+                        donantesGuardados.add(donanteId);
+                    }
                 }
             }
         }
@@ -151,7 +161,7 @@ public class BancoSangre {
     }
 
     
-    public void registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre) {
+    public boolean registrarDonanteEnCampaña(Donante donante, String ubicacion, String nombre) {
         String clave = generarClaveCampania(ubicacion, nombre);
         List<Campania> listaCampañas = campañas.get(clave);
     
@@ -162,7 +172,9 @@ public class BancoSangre {
             inventarioDeSangre.agregarSangre(donante.getTipoSangre(), donante.getFactorRH(), (int) donante.getCantDonada());
         } else {
             System.out.println("Campaña no enco1ntrada.");
+            return false;
         }
+        return true;
     }
 
     
@@ -197,7 +209,7 @@ public class BancoSangre {
        return todos;
    }
    
-    public void modificarDonanteEnCampania(String rut, int cantDonada, String tipoSangre, String factorRH, String ubicacion, String nombreCampania) {
+    public boolean modificarDonanteEnCampania(String rut, int cantDonada, String tipoSangre, String factorRH, String ubicacion, String nombreCampania) {
         String clave = generarClaveCampania(ubicacion, nombreCampania);
         List<Campania> listaCampanias = campañas.get(clave);
     
@@ -206,10 +218,12 @@ public class BancoSangre {
             campania.modificarDonante(rut, cantDonada, tipoSangre, factorRH);
         } else {
             System.out.println("Campaña no encontrada.");
+            return false;
         }
+        return true;
     }
     
-    public void eliminarDonanteEnCampania(String rut, String ubicacion, String nombreCampania) {
+    public boolean eliminarDonanteEnCampania(String rut, String ubicacion, String nombreCampania) {
         String clave = generarClaveCampania(ubicacion, nombreCampania);
         List<Campania> listaCampanias = campañas.get(clave);
     
@@ -218,12 +232,15 @@ public class BancoSangre {
             campania.eliminarDonante(rut);
         } else {
             System.out.println("Campaña no encontrada.");
+            return false;
         }
+        return true;
     }
     
-    public void eliminarCampania(String ubicacion, String nombreCampania) {
-        if (campañas.containsKey(ubicacion)) {
-            List<Campania> listaCampanias = campañas.get(ubicacion);
+    public boolean eliminarCampania(String ubicacion, String nombreCampania) {
+        String clave = generarClaveCampania(ubicacion, nombreCampania);
+        if (campañas.containsKey(clave)) {
+            List<Campania> listaCampanias = campañas.get(clave);
 
             for (int i = 0; i < listaCampanias.size(); i++) {
                 if (listaCampanias.get(i).getNombre().equals(nombreCampania)) {
@@ -231,15 +248,17 @@ public class BancoSangre {
                 
                     // Si la lista queda vacía, eliminar también la entrada en el mapa
                     if (listaCampanias.isEmpty()) {
-                        campañas.remove(ubicacion);
+                        campañas.remove(clave);
                     }
                 
                     System.out.println("Campaña eliminada exitosamente.");
+                    return true;
                 }
             }
         }
     
         System.out.println("Campaña no encontrada.");
+        return false;
     }
 
     
@@ -293,7 +312,11 @@ public class BancoSangre {
         inventarioDeSangre.mostrarInventario();
     }
     
-    public void retirarSangre(String tipoSangre, int cantidad) {
-        inventarioDeSangre.retirarSangre(tipoSangre, cantidad);
+    public Map<String, Integer> getReservasSangre() {
+        return inventarioDeSangre.getReservasSangre();
+    }
+    
+    public boolean retirarSangre(String tipoSangre, int cantidad) {
+        return inventarioDeSangre.retirarSangre(tipoSangre, cantidad);
     }
 }

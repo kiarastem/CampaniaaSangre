@@ -4,6 +4,8 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kndre
@@ -31,10 +33,10 @@ public class RetirarSangre extends javax.swing.JFrame {
         label2 = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldRutEli = new javax.swing.JTextField();
-        jTextFieldUbicaEli = new javax.swing.JTextField();
+        jTextFieldTipoRet = new javax.swing.JTextField();
+        jTextFieldCantRet = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
-        jButtonElim = new javax.swing.JButton();
+        jButtonRet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,15 +51,15 @@ public class RetirarSangre extends javax.swing.JFrame {
 
         jLabel2.setText("Cantidad de sangre a retirar            :");
 
-        jTextFieldRutEli.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldTipoRet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldRutEliActionPerformed(evt);
+                jTextFieldTipoRetActionPerformed(evt);
             }
         });
 
-        jTextFieldUbicaEli.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldCantRet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUbicaEliActionPerformed(evt);
+                jTextFieldCantRetActionPerformed(evt);
             }
         });
 
@@ -68,10 +70,10 @@ public class RetirarSangre extends javax.swing.JFrame {
             }
         });
 
-        jButtonElim.setText("Retirar");
-        jButtonElim.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRet.setText("Retirar");
+        jButtonRet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonElimActionPerformed(evt);
+                jButtonRetActionPerformed(evt);
             }
         });
 
@@ -89,12 +91,12 @@ public class RetirarSangre extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(103, 103, 103)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldUbicaEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRutEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldCantRet, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldTipoRet, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCancelar)
                         .addGap(360, 360, 360)
-                        .addComponent(jButtonElim)))
+                        .addComponent(jButtonRet)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,38 +106,62 @@ public class RetirarSangre extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldRutEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTipoRet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldUbicaEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCantRet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonElim))
+                    .addComponent(jButtonRet))
                 .addGap(37, 37, 37))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldUbicaEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUbicaEliActionPerformed
+    private void jTextFieldCantRetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantRetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUbicaEliActionPerformed
+    }//GEN-LAST:event_jTextFieldCantRetActionPerformed
 
-    private void jButtonElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonElimActionPerformed
-        String rut = jTextFieldRutEli.getText();
-        String nomCam = jTextFieldNomEli.getText();
-        String ubic = jTextFieldUbicaEli.getText();
-        banco.eliminarDonanteEnCampania(rut, ubic, nomCam);
-    }//GEN-LAST:event_jButtonElimActionPerformed
+    private void jButtonRetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetActionPerformed
+        String tipo = jTextFieldTipoRet.getText();
+    String cant = jTextFieldCantRet.getText(); // Cambié 'Cant' a 'cant' para mantener la consistencia con el uso posterior
+    int cantidad;
 
-    private void jTextFieldRutEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRutEliActionPerformed
+    try {
+        cantidad = Integer.parseInt(cant); // Intenta convertir el texto a un entero
+        boolean exito = banco.retirarSangre(tipo, cantidad); // Asegúrate de que este método devuelva un booleano o algo que indique éxito
+
+        if (exito) { // Verifica si la operación fue exitosa
+            // Muestra un cuadro de diálogo con el resultado
+            JOptionPane.showMessageDialog(this, 
+                cantidad + " cantidad de " + tipo + " sangre retirada", 
+                "Retiro de Sangre", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Muestra un mensaje de error si no se pudo retirar la sangre
+            JOptionPane.showMessageDialog(this, 
+                "No se pudo retirar la sangre. Verifica la disponibilidad.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (NumberFormatException e) {
+        // Maneja el caso donde la entrada no es un número válido
+        JOptionPane.showMessageDialog(this, 
+            "Por favor, ingresa una cantidad válida.", 
+            "Entrada inválida", 
+            JOptionPane.WARNING_MESSAGE);
+    }
+    }//GEN-LAST:event_jButtonRetActionPerformed
+
+    private void jTextFieldTipoRetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTipoRetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldRutEliActionPerformed
+    }//GEN-LAST:event_jTextFieldTipoRetActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        VentanaDonantes vd = new VentanaDonantes(banco);
+        VentanaSangre vd = new VentanaSangre(banco);
         vd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -178,11 +204,11 @@ public class RetirarSangre extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonElim;
+    private javax.swing.JButton jButtonRet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextFieldRutEli;
-    private javax.swing.JTextField jTextFieldUbicaEli;
+    private javax.swing.JTextField jTextFieldCantRet;
+    private javax.swing.JTextField jTextFieldTipoRet;
     private java.awt.Label label2;
     // End of variables declaration//GEN-END:variables
 }

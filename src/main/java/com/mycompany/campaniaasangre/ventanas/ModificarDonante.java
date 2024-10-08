@@ -4,6 +4,8 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kndre
@@ -191,7 +193,42 @@ public class ModificarDonante extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFactorModActionPerformed
 
     private void jButtonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModActionPerformed
-        banco.modificarDonanteEnCampania(jTextFieldRutMod.getText(), Integer.parseInt(jTextFieldSangreMod.getText()), jTextFieldSangreMod.getText(), jTextFieldFactorMod.getText(), jTextFieldUbicaMod.getText(), jTextFieldNomCamMod.getText());
+        try {
+        // Obtener los datos ingresados por el usuario
+        String rut = jTextFieldRutMod.getText();
+        int edad = Integer.parseInt(jTextFieldCantMod.getText()); 
+        String tipoSangre = jTextFieldSangreMod.getText();
+        String factorRH = jTextFieldFactorMod.getText();
+        String ubicacion = jTextFieldUbicaMod.getText();
+        String nomCam = jTextFieldNomCamMod.getText();
+        
+        // Intentar modificar los datos del donante en la campaña
+        boolean modificado = banco.modificarDonanteEnCampania(rut, edad, tipoSangre, factorRH, ubicacion, nomCam);
+        
+        // Verificar si la modificación fue exitosa
+        if (modificado) {
+            // Mostrar un mensaje de éxito
+            JOptionPane.showMessageDialog(this, "Donante modificado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Mostrar un mensaje de error si no se pudo modificar
+            JOptionPane.showMessageDialog(this, "Error al modificar el donante. Verifique los datos ingresados.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    } catch (NumberFormatException e) {
+        // Capturar excepciones de formato incorrecto (como edad no numérica)
+        JOptionPane.showMessageDialog(this, "Error en el formato de los datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        // Capturar cualquier otra excepción y mostrar un mensaje de error
+        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    // Limpiar los campos después de la operación
+    jTextFieldRutMod.setText("");
+    jTextFieldCantMod.setText("");
+    jTextFieldSangreMod.setText("");
+    jTextFieldFactorMod.setText("");
+    jTextFieldUbicaMod.setText("");
+    jTextFieldNomCamMod.setText("");
     }//GEN-LAST:event_jButtonModActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
