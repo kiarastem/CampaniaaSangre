@@ -35,7 +35,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextFieldCantPers" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFecha" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
                           <Component id="jTextFieldUbica" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
                           <Component id="jTextFieldNom" alignment="0" min="-2" pref="246" max="-2" attributes="0"/>
                       </Group>
@@ -68,7 +68,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldCantPers" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldFecha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="39" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -94,7 +94,7 @@
           <Color blue="f2" green="f2" red="f0" type="rgb"/>
         </Property>
         <Property name="name" type="java.lang.String" value="titulo" noResource="true"/>
-        <Property name="text" type="java.lang.String" value="Agregar personal a campa&#xf1;a"/>
+        <Property name="text" type="java.lang.String" value="Agregar campa&#xf1;a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -109,19 +109,22 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cantidad de personal a asignar   :"/>
+        <Property name="text" type="java.lang.String" value="Fecha             :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNom">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNomActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldUbica">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldUbicaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldCantPers">
+    <Component class="javax.swing.JTextField" name="jTextFieldFecha">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCantPersActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFechaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancelar">
@@ -134,7 +137,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAdd">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Asignar"/>
+        <Property name="text" type="java.lang.String" value="Agregar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddActionPerformed"/>

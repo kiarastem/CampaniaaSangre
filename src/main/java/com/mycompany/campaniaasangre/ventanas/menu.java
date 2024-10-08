@@ -14,13 +14,13 @@ import java.awt.event.*;
  */
 public class menu extends javax.swing.JFrame {
     @SuppressWarnings("FieldMayBeFinal")
-    private BancoSangre banco;
+    private BancoSangre banco = new BancoSangre();
 
     /**
      * Creates new form menu
      */
     public menu(BancoSangre banco) {
-        this.banco = new BancoSangre();
+        this.banco = banco;
         initComponents();
     }
     
@@ -134,7 +134,7 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

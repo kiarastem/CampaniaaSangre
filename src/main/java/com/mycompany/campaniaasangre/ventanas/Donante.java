@@ -3,9 +3,9 @@ package com.mycompany.campaniaasangre.ventanas;
 public class Donante extends Persona{
     private String tipoSangre;
     private String factorRH;
-    private double cantDonada;
+    private int cantDonada;
     
-    public Donante(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email, String tipoSangre, String factorRH, double cantDonada) {
+    public Donante(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email, String tipoSangre, String factorRH, int cantDonada) {
         super(nombre, edad, rut, genero, direccion, telefono, email);
         this.tipoSangre = tipoSangre;
         this.factorRH = factorRH;
@@ -38,7 +38,7 @@ public class Donante extends Persona{
         return cantDonada;
     }
 
-    public void setCantDonada(double cantDonada) {
+    public void setCantDonada(int cantDonada) {
         this.cantDonada = cantDonada;
     }
     

@@ -32,7 +32,6 @@ public class EliminarCampaña extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldRutEli = new javax.swing.JTextField();
         jTextFieldUbicaEli = new javax.swing.JTextField();
         jTextFieldNomEli = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
@@ -45,19 +44,11 @@ public class EliminarCampaña extends javax.swing.JFrame {
         label2.setFont(new java.awt.Font("Dialog", 3, 24)); // NOI18N
         label2.setForeground(new java.awt.Color(240, 242, 242));
         label2.setName("titulo"); // NOI18N
-        label2.setText("Eliminar Donante");
-
-        jLabel1.setText("Rut del donante a eliminar");
+        label2.setText("Eliminar campaña");
 
         jLabel2.setText("Ubicación de la campaña del donante a eliminar     :");
 
         jLabel3.setText("Nombre de la campaña del donante a eliminar");
-
-        jTextFieldRutEli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldRutEliActionPerformed(evt);
-            }
-        });
 
         jTextFieldUbicaEli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,8 +92,7 @@ public class EliminarCampaña extends javax.swing.JFrame {
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNomEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldUbicaEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRutEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldUbicaEli, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonCancelar)
@@ -115,9 +105,7 @@ public class EliminarCampaña extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldRutEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -126,7 +114,7 @@ public class EliminarCampaña extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldNomEli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonElim))
@@ -145,18 +133,13 @@ public class EliminarCampaña extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNomEliActionPerformed
 
     private void jButtonElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonElimActionPerformed
-        String rut = jTextFieldRutEli.getText();
         String nomCam = jTextFieldNomEli.getText();
         String ubic = jTextFieldUbicaEli.getText();
-        banco.eliminarDonanteEnCampania(rut, ubic, nomCam);
+        banco.eliminarCampania(ubic, nomCam);  
     }//GEN-LAST:event_jButtonElimActionPerformed
 
-    private void jTextFieldRutEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRutEliActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldRutEliActionPerformed
-
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        VentanaDonantes vd = new VentanaDonantes(banco);
+        VentanaCampañas vd = new VentanaCampañas(banco);
         vd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
@@ -204,7 +187,6 @@ public class EliminarCampaña extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextFieldNomEli;
-    private javax.swing.JTextField jTextFieldRutEli;
     private javax.swing.JTextField jTextFieldUbicaEli;
     private java.awt.Label label2;
     // End of variables declaration//GEN-END:variables

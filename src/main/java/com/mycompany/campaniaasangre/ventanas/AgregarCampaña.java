@@ -37,7 +37,7 @@ public class AgregarCampaña extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldNom = new javax.swing.JTextField();
         jTextFieldUbica = new javax.swing.JTextField();
-        jTextFieldCantPers = new javax.swing.JTextField();
+        jTextFieldFecha = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
         jButtonAdd = new javax.swing.JButton();
 
@@ -48,13 +48,19 @@ public class AgregarCampaña extends javax.swing.JFrame {
         label2.setFont(new java.awt.Font("Dialog", 3, 24)); // NOI18N
         label2.setForeground(new java.awt.Color(240, 242, 242));
         label2.setName("titulo"); // NOI18N
-        label2.setText("Agregar personal a campaña");
+        label2.setText("Agregar campaña");
 
         jLabel1.setText("Nombre de la campaña         :");
 
         jLabel2.setText("Ubicación de la campaña (Ej: Hospital Van Buren)       :");
 
-        jLabel3.setText("Cantidad de personal a asignar   :");
+        jLabel3.setText("Fecha             :");
+
+        jTextFieldNom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomActionPerformed(evt);
+            }
+        });
 
         jTextFieldUbica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,9 +68,9 @@ public class AgregarCampaña extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldCantPers.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCantPersActionPerformed(evt);
+                jTextFieldFechaActionPerformed(evt);
             }
         });
 
@@ -75,7 +81,7 @@ public class AgregarCampaña extends javax.swing.JFrame {
             }
         });
 
-        jButtonAdd.setText("Asignar");
+        jButtonAdd.setText("Agregar");
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
@@ -97,7 +103,7 @@ public class AgregarCampaña extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldCantPers, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldUbica, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(50, Short.MAX_VALUE))
@@ -122,7 +128,7 @@ public class AgregarCampaña extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextFieldCantPers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
@@ -137,12 +143,17 @@ public class AgregarCampaña extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUbicaActionPerformed
 
-    private void jTextFieldCantPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCantPersActionPerformed
+    private void jTextFieldFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCantPersActionPerformed
+    }//GEN-LAST:event_jTextFieldFechaActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        String nom = jTextFieldNom.getText();
+        String ubica = jTextFieldUbica.getText();
+        String fecha = jTextFieldFecha.getText();
         
+        Campania nuevaCampania = new Campania(nom, ubica, fecha);
+        banco.agregarCampaña(nuevaCampania);
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -150,6 +161,10 @@ public class AgregarCampaña extends javax.swing.JFrame {
         vd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jTextFieldNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomActionPerformed
+        
+    }//GEN-LAST:event_jTextFieldNomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,7 +207,7 @@ public class AgregarCampaña extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextFieldCantPers;
+    private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldNom;
     private javax.swing.JTextField jTextFieldUbica;
     private java.awt.Label label2;

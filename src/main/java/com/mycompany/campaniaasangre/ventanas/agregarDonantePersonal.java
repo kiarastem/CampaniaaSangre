@@ -302,7 +302,7 @@ public class agregarDonantePersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldEdadActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        Donante nuevoDonante = new Donante(jTextFieldNombre.getText(), Integer.parseInt(jTextFieldEdad.getText()), jTextFieldRUT.getText(), jTextFieldSexo.getText(), jTextFieldDireccion.getText(), jTextFieldTelefono.getText(), jTextFieldEmail.getText(), jTextFieldTipoSangre.getText(), jTextFieldFactorRH.getText(), Double.parseDouble(jTextFieldCantidadDonada.getText()));
+        Donante nuevoDonante = new Donante(jTextFieldNombre.getText(), Integer.parseInt(jTextFieldEdad.getText()), jTextFieldRUT.getText(), jTextFieldSexo.getText(), jTextFieldDireccion.getText(), jTextFieldTelefono.getText(), jTextFieldEmail.getText(), jTextFieldTipoSangre.getText(), jTextFieldFactorRH.getText(), Integer.parseInt(jTextFieldCantidadDonada.getText()));
         String ubicacion = jTextFieldUbic.getText();
         String nomCam = jTextFieldNomCam.getText();
         

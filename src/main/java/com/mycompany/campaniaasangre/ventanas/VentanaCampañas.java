@@ -4,6 +4,8 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas
@@ -150,23 +152,33 @@ public class VentanaCampañas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddDocActionPerformed
 
     private void jButtonDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelActionPerformed
-       
+       EliminarCampaña e = new EliminarCampaña(banco);
+       e.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_jButtonDelActionPerformed
 
     private void jButtonMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMainMenuActionPerformed
-     
+        menu m = new menu(banco);
+        m.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonMainMenuActionPerformed
 
     private void jButtonListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListActionPerformed
-
+        mostrarCampañas m = new mostrarCampañas(banco);
+        m.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonListActionPerformed
 
     private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadActionPerformed
-        
+         banco.cargarDatosIniciales();
+        // Mostrar un mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Datos cargados correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonLoadActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        // TODO add your handling code here:
+        AgregarCampaña a = new AgregarCampaña(banco);
+        a.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     /**

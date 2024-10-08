@@ -21,16 +21,26 @@ public class BancoSangre {
     
     @SuppressWarnings("CallToPrintStackTrace")
     public void cargarDatosIniciales() {
-        String csvFile = "donantes.csv";
-        String line;
         String cvsSplitBy = ",";
+        
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("donantes.csv");
+        if (inputStream == null) {
+            System.out.println("No se pudo encontrar el archivo donantes.csv");
+            return;
+        }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            boolean esPrimLine = true;
             while ((line = br.readLine()) != null) {
+                if(esPrimLine){
+                    esPrimLine = false;
+                    continue;
+                }
                 // Dividir la línea por comas
                 String[] datos = line.split(cvsSplitBy);
 
-                // Crear los objetos necesarios
+                // Extraer los datos del donante
                 String nombre = datos[0];
                 int edad = Integer.parseInt(datos[1]);
                 String rut = datos[2];
@@ -40,17 +50,66 @@ public class BancoSangre {
                 String email = datos[6];
                 String tipoSangre = datos[7];
                 String factorRH = datos[8];
-                double cantDonada = Double.parseDouble(datos[9]);
-                String nombreCampania = datos[10];
-                String hospital = datos[11];
+                int cantDonada = Integer.parseInt(datos[9]);
+                String nombreCampania = datos[10]; // Suponiendo que este dato está en la columna 11
+                String ubicacionCampania = datos[11]; // Columna 12
+                String fechaCampania = datos[12]; // Columna 13
 
+                // Crear el objeto Donante
                 Donante donante = new Donante(nombre, edad, rut, genero, direccion, telefono, email, tipoSangre, factorRH, cantDonada);
+            
+                // Crear o conseguir la campaña asociada
+                Campania campania = new Campania(nombreCampania, ubicacionCampania, fechaCampania);
+            
+                // Agregar el donante a la campaña
+                campania.getDonantesRegistrados().add(donante);
 
+                // Asegurarse de que la campaña esté en el mapa de campañas del BancoSangre
+                if (!campañas.containsKey(nombreCampania)) {
+                    campañas.put(nombreCampania, new ArrayList<>());
+                }
+                campañas.get(nombreCampania).add(campania);
+
+                // Agregar la cantidad donada al inventario de sangre
+                inventarioDeSangre.agregarSangre(tipoSangre, factorRH, cantDonada); // Asegúrate de que este método exista
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
+    public void guardarDatos(String rutaArchivo) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+        writer.write("Nombre,Edad,RUT,Género,Dirección,Teléfono,Email,Tipo de Sangre,Factor RH,Cantidad Donada,Nombre Campaña,Ubicación Campaña,Fecha Campaña");
+        writer.newLine();
+
+        for(List<Campania> listaCamp : campañas.values()){
+            
+            for (Campania campania : listaCamp) {
+                for (Donante donante : campania.getDonantesRegistrados()) {
+                    writer.write(String.join(",",
+                        donante.getNombre(),
+                        String.valueOf(donante.getEdad()),
+                        donante.getRut(),
+                        donante.getGenero(),
+                        donante.getDireccion(),
+                        donante.getTelefono(),
+                        donante.getEmail(),
+                        donante.getTipoSangre(),
+                        donante.getFactorRH(),
+                        String.valueOf(donante.getCantDonada()),
+                        campania.getNombre(), // Obtener el nombre de la campaña
+                        campania.getUbicacion(), // Asegúrate de tener un método para obtener la ubicación
+                        campania.getFecha())); // Asegúrate de tener un método para obtener la fecha
+                    writer.newLine();
+                }
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
     
     public Optional<Campania> buscarOCrearCampania(String nombreCampania) {
         for (List<Campania> listaCampanias : campañas.values()) {
@@ -138,7 +197,7 @@ public class BancoSangre {
        return todos;
    }
    
-    public void modificarDonanteEnCampania(String rut, double cantDonada, String tipoSangre, String factorRH, String ubicacion, String nombreCampania) {
+    public void modificarDonanteEnCampania(String rut, int cantDonada, String tipoSangre, String factorRH, String ubicacion, String nombreCampania) {
         String clave = generarClaveCampania(ubicacion, nombreCampania);
         List<Campania> listaCampanias = campañas.get(clave);
     
