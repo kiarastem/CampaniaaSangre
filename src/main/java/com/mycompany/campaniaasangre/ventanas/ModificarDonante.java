@@ -191,7 +191,7 @@ public class ModificarDonante extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFactorModActionPerformed
 
     private void jButtonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModActionPerformed
-        banco.modificarDonanteEnCampania(jTextFieldRutMod.getText(), Double.parseDouble(jTextFieldSangreMod.getText()), jTextFieldSangreMod.getText(), jTextFieldFactorMod.getText(), jTextFieldUbicaMod.getText(), jTextFieldNomCamMod.getText());
+        banco.modificarDonanteEnCampania(jTextFieldRutMod.getText(), Integer.parseInt(jTextFieldSangreMod.getText()), jTextFieldSangreMod.getText(), jTextFieldFactorMod.getText(), jTextFieldUbicaMod.getText(), jTextFieldNomCamMod.getText());
     }//GEN-LAST:event_jButtonModActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

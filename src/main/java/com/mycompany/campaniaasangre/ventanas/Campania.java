@@ -22,12 +22,12 @@ public class Campania {
         donantes.add(donante);
     }
     
-    public void agregarDonante(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email,  String tipoSangre, String factorRH, double cantidadDonada, Persona persona) {
+    public void agregarDonante(String nombre, int edad, String rut, String genero, String direccion, String telefono, String email,  String tipoSangre, String factorRH, int cantidadDonada, Persona persona) {
         Donante nuevoDonante = new Donante(nombre, edad, rut, genero, direccion, telefono, email, tipoSangre, factorRH, cantidadDonada);
         donantes.add(nuevoDonante);
     }
     
-    public void modificarDonante(String rut, double cantDonada, String tipoSangre, String factorRH) {
+    public void modificarDonante(String rut, int cantDonada, String tipoSangre, String factorRH) {
         for (Donante donante : donantes) {
             if (donante.getRut().equals(rut)) {
                 donante.setTipoSangre(tipoSangre);

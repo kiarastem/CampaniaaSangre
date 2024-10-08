@@ -4,17 +4,26 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+import java.util.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author kndre
  */
 public class mostrarCampañas extends javax.swing.JFrame {
-
+    private BancoSangre banco;
+    private DefaultTableModel model;
     /**
      * Creates new form mostrarCampañas
      */
-    public mostrarCampañas() {
+    public mostrarCampañas(BancoSangre banco) {
+        this.banco = banco; 
         initComponents();
+        model = new DefaultTableModel(new String[]{"Nombre", "Hospital", "Fecha"}, 0);
+        jTable1.setModel(model);
+        listarCampanias();
     }
 
     /**
@@ -30,7 +39,7 @@ public class mostrarCampañas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +68,12 @@ public class mostrarCampañas extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de campañas");
 
-        jButton1.setText("Cerrar");
+        jButtonBack.setText("Volver");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -69,7 +83,7 @@ public class mostrarCampañas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
@@ -81,7 +95,7 @@ public class mostrarCampañas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButtonBack)
                 .addGap(29, 29, 29))
         );
 
@@ -99,16 +113,37 @@ public class mostrarCampañas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        VentanaCampañas vd = new VentanaCampañas(banco);
+        vd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonBackActionPerformed
+
+    public void listarCampanias(){
+        model.setRowCount(0); // Limpiamos el modelo de la tabla antes de agregar nuevos datos
+        
+        if (banco.getCampanias().isEmpty()) { // Asegúrate de tener un método para obtener las campañas
+            JOptionPane.showMessageDialog(this, "No hay campañas registradas.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        for (Map.Entry<String, List<Campania>> entry : banco.getCampanias().entrySet()) {
+            List<Campania> listaCampanias = entry.getValue();
+            for (Campania campania : listaCampanias) {
+                model.addRow(new Object[]{campania.getNombre(), campania.getUbicacion(), campania.getFecha()});
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /**public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+        /**try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -127,15 +162,15 @@ public class mostrarCampañas extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /** java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new mostrarCampañas().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
