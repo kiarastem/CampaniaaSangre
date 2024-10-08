@@ -4,6 +4,8 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+import com.mycompany.excepciones.DatosDonanteInvalidosException;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**
@@ -339,7 +341,7 @@ public class agregarDonantePersonal extends javax.swing.JFrame {
     } catch (NumberFormatException e) {
         // Mostrar un mensaje de error si ocurre una excepción con la conversión de datos numéricos
         JOptionPane.showMessageDialog(this, "Por favor, ingrese los datos correctamente. Verifique que los campos numéricos contengan solo números.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
+    } catch (DatosDonanteInvalidosException | HeadlessException e) {
         // Capturar cualquier otra excepción
         JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
