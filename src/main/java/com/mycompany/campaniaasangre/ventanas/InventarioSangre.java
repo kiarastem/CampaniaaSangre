@@ -34,7 +34,7 @@ public class InventarioSangre {
         }
     }
     
-    public void retirarSangre(String tipoSangre, int cantidad) {
+    public boolean retirarSangre(String tipoSangre, int cantidad) {
         if (reservasSangre.containsKey(tipoSangre)) {
             int cantidadDisponible = reservasSangre.get(tipoSangre);
         
@@ -42,12 +42,14 @@ public class InventarioSangre {
             if (cantidadDisponible >= cantidad) {
                 reservasSangre.put(tipoSangre, cantidadDisponible - cantidad);
                 System.out.println("Se han retirado " + cantidad + " unidades de sangre del tipo " + tipoSangre + ".");
+                return true;
             } else {
                 System.out.println("No hay suficiente sangre disponible del tipo " + tipoSangre + ".");
             }
         } else {
             System.out.println("Tipo de sangre no válido.");
         }
+        return false;
     }
     
     public int obtenerCantidadSangre(String tipoSangre) {
@@ -59,5 +61,9 @@ public class InventarioSangre {
         for(Map.Entry<String, Integer> entry : reservasSangre.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " unidades");
         }
+    }
+    
+    public Map<String, Integer> getReservasSangre() {
+        return reservasSangre;
     }
 }

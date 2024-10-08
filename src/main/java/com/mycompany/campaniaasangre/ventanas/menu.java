@@ -41,7 +41,7 @@ public class menu extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        jButtonReservas1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,10 +75,10 @@ public class menu extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/file-removebg-preview.png"))); // NOI18N
 
-        jButton6.setText("Administrar reservas de sangre");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReservas1.setText("Administrar reservas de sangre");
+        jButtonReservas1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButtonReservas1ActionPerformed(evt);
             }
         });
 
@@ -92,7 +92,7 @@ public class menu extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
+                    .addComponent(jButtonReservas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
                 .addGap(121, 121, 121)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -120,7 +120,7 @@ public class menu extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6)
+                                .addComponent(jButtonReservas1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton4)
                                 .addGap(87, 87, 87))))))
@@ -130,11 +130,20 @@ public class menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       System.exit(0);
-    }//GEN-LAST:event_jButton4ActionPerformed
+       // Preguntar si el usuario quiere guardar los datos antes de salir
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Desea guardar los datos antes de cerrar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Aquí especificas la ruta del archivo donde se guardarán los datos
+            String rutaArchivo = "donantes_guardados.csv";
+            banco.guardarDatos(rutaArchivo); // Llama a tu método para guardar los datos
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    }//GEN-LAST:event_jButton6ActionPerformed
+            JOptionPane.showMessageDialog(this, "Datos guardados correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        // Finalmente, cerrar la ventana
+        System.exit(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         VentanaDonantes a = new VentanaDonantes(this.banco);
@@ -148,6 +157,27 @@ public class menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButtonReservas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservas1ActionPerformed
+        VentanaSangre s = new VentanaSangre(this.banco);
+        s.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonReservas1ActionPerformed
+
+    private void guardarAntesDeCerrar() {
+        // Preguntar si el usuario quiere guardar los datos antes de salir
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Desea guardar los datos antes de cerrar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            // Aquí especificas la ruta del archivo donde se guardarán los datos
+            String rutaArchivo = "donantes_guardados.csv";
+            banco.guardarDatos(rutaArchivo); // Llama a tu método para guardar los datos
+
+            JOptionPane.showMessageDialog(this, "Datos guardados correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        // Finalmente, cerrar la ventana
+        System.exit(0);
+    }
     /**
      * @param args the command line arguments
      */
@@ -190,7 +220,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonReservas1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private java.awt.Label label1;

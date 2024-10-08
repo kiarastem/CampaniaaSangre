@@ -4,6 +4,8 @@
  */
 package com.mycompany.campaniaasangre.ventanas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kndre
@@ -145,10 +147,33 @@ public class EliminarDonante extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNomEliActionPerformed
 
     private void jButtonElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonElimActionPerformed
-        String rut = jTextFieldRutEli.getText();
-        String nomCam = jTextFieldNomEli.getText();
-        String ubic = jTextFieldUbicaEli.getText();
-        banco.eliminarDonanteEnCampania(rut, ubic, nomCam);
+        try {
+            // Obtener los datos ingresados por el usuario
+            String rut = jTextFieldRutEli.getText();
+            String nomCam = jTextFieldNomEli.getText();
+            String ubic = jTextFieldUbicaEli.getText();
+        
+            // Intentar eliminar al donante en la campaña
+            boolean eliminado = banco.eliminarDonanteEnCampania(rut, ubic, nomCam);
+        
+            // Verificar si la eliminación fue exitosa
+            if (eliminado) {
+            // Mostrar un mensaje de éxito
+            JOptionPane.showMessageDialog(this, "Donante eliminado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // Mostrar un mensaje de error si no se pudo eliminar
+                JOptionPane.showMessageDialog(this, "Error al eliminar el donante. Verifique los datos ingresados.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        
+        } catch (Exception e) {
+            // Capturar cualquier excepción y mostrar un mensaje de error
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+        // Limpiar los campos después de la operación
+        jTextFieldRutEli.setText("");
+        jTextFieldNomEli.setText("");
+        jTextFieldUbicaEli.setText("");
     }//GEN-LAST:event_jButtonElimActionPerformed
 
     private void jTextFieldRutEliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRutEliActionPerformed

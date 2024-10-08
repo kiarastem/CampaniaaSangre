@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.campaniaasangre.ventanas;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kndre
@@ -302,11 +305,58 @@ public class agregarDonantePersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldEdadActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        Donante nuevoDonante = new Donante(jTextFieldNombre.getText(), Integer.parseInt(jTextFieldEdad.getText()), jTextFieldRUT.getText(), jTextFieldSexo.getText(), jTextFieldDireccion.getText(), jTextFieldTelefono.getText(), jTextFieldEmail.getText(), jTextFieldTipoSangre.getText(), jTextFieldFactorRH.getText(), Integer.parseInt(jTextFieldCantidadDonada.getText()));
+         try {
+        // Crear el objeto Donante con los datos del formulario
+        Donante nuevoDonante = new Donante(
+            jTextFieldNombre.getText(), 
+            Integer.parseInt(jTextFieldEdad.getText()), 
+            jTextFieldRUT.getText(), 
+            jTextFieldSexo.getText(), 
+            jTextFieldDireccion.getText(), 
+            jTextFieldTelefono.getText(), 
+            jTextFieldEmail.getText(), 
+            jTextFieldTipoSangre.getText(), 
+            jTextFieldFactorRH.getText(), 
+            Integer.parseInt(jTextFieldCantidadDonada.getText())
+        );
+        
+        // Obtener los textos de los campos correspondientes a la campaña
         String ubicacion = jTextFieldUbic.getText();
         String nomCam = jTextFieldNomCam.getText();
         
-        banco.registrarDonanteEnCampaña(nuevoDonante, ubicacion, nomCam);
+        // Intentar registrar al donante en la campaña
+        boolean registrado = banco.registrarDonanteEnCampaña(nuevoDonante, ubicacion, nomCam);
+        
+        // Verificar si el donante fue registrado correctamente
+        if (registrado) {
+            // Mostrar un mensaje de éxito
+            JOptionPane.showMessageDialog(this, "Donante registrado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Mostrar un mensaje de error si no se pudo registrar
+            JOptionPane.showMessageDialog(this, "Error al registrar el donante. Verifique los datos de la campaña.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    } catch (NumberFormatException e) {
+        // Mostrar un mensaje de error si ocurre una excepción con la conversión de datos numéricos
+        JOptionPane.showMessageDialog(this, "Por favor, ingrese los datos correctamente. Verifique que los campos numéricos contengan solo números.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        // Capturar cualquier otra excepción
+        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    // Limpiar los campos después de la operación
+    jTextFieldNombre.setText("");
+    jTextFieldEdad.setText("");
+    jTextFieldRUT.setText("");
+    jTextFieldSexo.setText("");
+    jTextFieldDireccion.setText("");
+    jTextFieldTelefono.setText("");
+    jTextFieldEmail.setText("");
+    jTextFieldTipoSangre.setText("");
+    jTextFieldFactorRH.setText("");
+    jTextFieldCantidadDonada.setText("");
+    jTextFieldUbic.setText("");
+    jTextFieldNomCam.setText("");
     }//GEN-LAST:event_jButtonAddActionPerformed
   
     private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
